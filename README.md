@@ -1,2 +1,1 @@
-# django_loginEVE
-django_loginEVE
+"# django_eve" 
