@@ -1,0 +1,35 @@
+name: Deploy Django App
+
+on:
+  push:
+    branches:
+      - main  # Trigger on pushes to main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout repository code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Create PEM file from GitHub Secret
+      - name: Create PEM file from secret
+        run: |
+          echo "${{ secrets.OHIOKEY }}" > ohiokey.pem
+          chmod 600 ohiokey.pem
+
+      # Step 3: SSH into EC2 and deploy
+      - name: Deploy to EC2
+        run: |
+          ssh -i ohiokey.pem -o StrictHostKeyChecking=no ubuntu@ec2-3-108-250-182.ap-south-1.compute.amazonaws.com << 'EOF'
+            cd /home/ubuntu/django_loginEVE
+            git pull origin main
+            source myvenv/bin/activate
+            pip install -r requirements.txt
+            python manage.py migrate --noinput
+            python manage.py collectstatic --noinput
+            sudo systemctl restart gunicorn
+            sudo systemctl restart nginx
+          EOF
