@@ -1,0 +1,59 @@
+/* ===== Full page background ===== */
+body {
+    margin: 0;
+    padding: 100;
+    min-height: 100vh;
+
+    background-image: url("../images/regi.jpg"); /* change image name if needed */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Center content vertically */
+.row {
+    min-height: 100vh;
+    align-items: center;
+}
+
+/* Transparent card */
+/* Increase register form width */
+.col-sm-6 {
+    max-width: 400px;        /* 🔼 increase width */
+    width: 50%;
+
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    padding: 50px;           /* 🔼 increase height (inner space) */
+    border-radius: 16px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Bigger heading */
+h2 {
+    font-size: 32px;         /* 🔼 heading size */
+    margin-bottom: 35px;
+}
+
+/* Bigger labels */
+label {
+    font-size: 16px;
+}
+
+/* Bigger inputs */
+.form-control {
+    height: 38px;            /* 🔼 input height */
+    font-size: 16px;
+}
+
+/* Bigger buttons */
+.btn-primary,
+.btn-secondary {
+    height: 48px;
+    font-size: 16px;
+}

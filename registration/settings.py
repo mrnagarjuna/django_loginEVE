@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-o-at08#mk6kqw$-l13w0f4g2ez#=nz^yw%e6=v-x_#0(=2exh(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['35.154.129.27', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app1',
+    'registration',
 ]
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
 
@@ -119,7 +121,12 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
+# DeSTATIC_URL = '/static/'
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+# Optional: during development, this is default
+STATIC_ROOT = BASE_DIR / "staticfiles"
+

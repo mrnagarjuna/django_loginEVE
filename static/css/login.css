@@ -1,0 +1,67 @@
+/* ===== Page Background ===== */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+
+    background-image: url("../images/rg.jpg");
+    background-size: 100% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Center content */
+.row {
+    min-height: 100vh;
+    align-items: center;
+}
+
+/* Glass card - FULL TRANSPARENCY */
+.auth-card {
+    max-width: 400px;
+    width: 50%;
+
+    background: rgba(255, 255, 255, 0.05); /* 🔹 almost fully transparent */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    padding: 50px;
+    border-radius: 16px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+
+    /* 🔹 move card slightly LEFT */
+    transform: translateX(-40px);
+}
+
+/* Heading */
+.auth-card h2 {
+    margin-bottom: 30px;
+    color: #ffffff;
+}
+
+/* Labels */
+label {
+    color: #ffffff;
+    font-size: 16px;
+}
+
+/* Inputs */
+.form-control {
+    height: 48px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: none;
+
+    background: rgba(255, 255, 255, 0.85);
+}
+
+/* Buttons */
+.btn-primary,
+.btn-secondary {
+    height: 48px;
+    font-size: 16px;
+    margin-top: 10px;
+}

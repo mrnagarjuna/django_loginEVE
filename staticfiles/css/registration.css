@@ -1,0 +1,87 @@
+/* ==========================
+   Full Page Background
+========================== */
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-image: url("../images/event-bg.jpg"); /* Update path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* ==========================
+   Center Content Vertically
+========================== */
+.row.justify-content-center {
+    min-height: 100vh;
+    align-items: center;
+}
+
+/* ==========================
+   Glass Transparent Card
+========================== */
+.register-box {
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.35);
+}
+
+/* ==========================
+   Labels
+========================== */
+.form-group label {
+    font-weight: 600;
+    color: #000;
+}
+
+/* ==========================
+   Inputs (Username, Password, Confirm Password)
+========================== */
+.form-control {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-radius: 8px;
+    border: none;
+    padding: 10px;
+}
+
+.form-control::placeholder {
+    color: #666;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* ==========================
+   Buttons
+========================== */
+.btn-primary,
+.btn-secondary {
+    margin-top: 10px;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-weight: 600;
+}
+
+/* ==========================
+   Error Text
+========================== */
+.text-danger {
+    font-size: 13px;
+}
+
+/* ==========================
+   Mobile Responsive
+========================== */
+@media (max-width: 576px) {
+    .register-box {
+        padding: 20px;
+    }
+}
