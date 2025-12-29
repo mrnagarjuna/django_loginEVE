@@ -14,11 +14,7 @@ body {
 .hero-section {
     height: 100vh;
     width: 100%;
-<<<<<<< HEAD
     background-image: url("../images/part.jpg");
-=======
-    background-image: url("../images/bgm.jpg");
->>>>>>> 33ecd38461b1ae0581f6142c086b5c428c10f28c
     background-size: cover;            /* Make background fully cover */
     background-position: center;
     background-repeat: no-repeat;
@@ -106,7 +102,7 @@ body {
     padding-left: 100%;
     font-size: 34px;
     font-weight: bold;
-    color: #9c10b4;
+    color: #56e31f;
     animation:
         scroll-left 10s linear infinite,
         sparkle 1.5s infinite alternate;
