@@ -16,9 +16,9 @@
 <!-- ================= HERO SECTION ================= -->
 <section class="hero-section">
 
-    <!-- ===== NAVBAR ===== -->
+    <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="tel:+913981257976">📞 +91 3981257976</a>
+        <a class="navbar-brand" href="tel:+919381257976">📞 +91 9381257976</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -40,12 +40,12 @@
         </div>
     </nav>
 
-    <!-- ===== SCROLL TEXT ===== -->
+    <!-- SCROLL TEXT -->
     <div class="scroll-text">
-        <span>WELCOME TO AR EVENTS</span>
+        <span>WELCOME TO AR EVENTS • WEDDINGS • BIRTHDAYS • CORPORATE EVENTS</span>
     </div>
 
-    <!-- ===== HERO CONTENT ===== -->
+    <!-- HERO CONTENT -->
     <div class="hero-content">
         <div class="hero-card">
             <h2>✨ Celebrate Every Moment With Us ✨</h2>
@@ -63,7 +63,7 @@
 
         <div class="row">
 
-            <!-- Wedding -->
+            {% comment %} SERVICE CARD {% endcomment %}
             <div class="col-md-4 mb-4">
                 <div class="service-card">
                     <img src="{% static 'images/wd.jpg' %}">
@@ -75,7 +75,6 @@
                 </div>
             </div>
 
-            <!-- Corporate -->
             <div class="col-md-4 mb-4">
                 <div class="service-card">
                     <img src="{% static 'images/cor.jpg' %}">
@@ -87,7 +86,6 @@
                 </div>
             </div>
 
-            <!-- Birthday -->
             <div class="col-md-4 mb-4">
                 <div class="service-card">
                     <img src="{% static 'images/bir.jpg' %}">
@@ -99,7 +97,6 @@
                 </div>
             </div>
 
-            <!-- Entertainment -->
             <div class="col-md-4 mb-4">
                 <div class="service-card">
                     <img src="{% static 'images/cele.jpg' %}">
@@ -111,7 +108,6 @@
                 </div>
             </div>
 
-            <!-- Receptions -->
             <div class="col-md-4 mb-4">
                 <div class="service-card">
                     <img src="{% static 'images/rec.jpg' %}">
@@ -123,43 +119,28 @@
                 </div>
             </div>
 
-             <!-- Receptions -->
-            <div class="col-md-4 mb-4">
-                <div class="service-card">
-                    <img src="{% static 'images/rec.jpg' %}">
-                    <div class="service-content">
-                        <h5>Games</h5>
-                        <p>Make your reception memorable.</p>
-                        <a href="#" class="btn btn-warning btn-sm">Know More</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Haldi -->
             <div class="col-md-4 mb-4">
                 <div class="service-card">
                     <img src="{% static 'images/hal.jpg' %}">
                     <div class="service-content">
-                        <h5>Haldi & Mehindi</h5>
+                        <h5>Haldi & Mehendi</h5>
                         <p>Traditional celebrations with elegance.</p>
                         <a href="#" class="btn btn-warning btn-sm">Know More</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Photography -->
             <div class="col-md-4 mb-4">
                 <div class="service-card">
                     <img src="{% static 'images/pho.jpg' %}">
                     <div class="service-content">
-                        <h5>Photography & Videography</h5>
+                        <h5>Photography</h5>
                         <p>We capture your special moments professionally.</p>
                         <a href="#" class="btn btn-warning btn-sm">Know More</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Concerts -->
             <div class="col-md-4 mb-4">
                 <div class="service-card">
                     <img src="{% static 'images/cons.jpg' %}">
@@ -175,108 +156,61 @@
     </div>
 </section>
 
-    <!-- ================= OUR WORK SECTION ================= -->
-    <section class="our-work-section">
-        <div class="container">
-            <div class="row text-center mb-4">
-                <div class="col-md-4">
-                    <h2>1500+</h2>
-                    <p>Featured Events</p>
-                </div>
-                <div class="col-md-4">
-                    <h2>1200+</h2>
-                    <p>Happy Customers</p>
-                </div>
-                <div class="col-md-4">
-                    <h2>6+</h2>
-                    <p>Years of Experience</p>
-                </div>
+<!-- ================= OUR WORK SECTION ================= -->
+<section class="our-work-section">
+    <div class="container">
+
+        <div class="row text-center mb-4">
+            <div class="col-md-4">
+                <h2>1500+</h2>
+                <p>Featured Events</p>
             </div>
-
-            <h2 class="text-center mb-4">Our Work</h2>
-
-            <div class="row gallery">
-                {% for i in "12345678" %}
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="gallery-img">
-                        <img src="{% static 'images/img1' %}{{ forloop.counter }}.jpg" alt="Work">
-                    </div>
-                </div>
-                {% endfor %}
+            <div class="col-md-4">
+                <h2>1200+</h2>
+                <p>Happy Customers</p>
+            </div>
+            <div class="col-md-4">
+                <h2>6+</h2>
+                <p>Years of Experience</p>
             </div>
         </div>
-    </section>
+
+        <h2 class="text-center mb-4">Our Work</h2>
+
+        <div class="row gallery">
+            {% for i in "12345678" %}
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="gallery-img">
+                    <img src="{% static 'images/img' %}{{ forloop.counter }}.jpg"
+                         alt="Work {{ forloop.counter }}">
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
 <!-- ================= FOOTER ================= -->
 <footer class="footer-section">
     <div class="container">
-        <div class="row">
 
-            <!-- Logo + About -->
+        <div class="row text-center contact-cards">
             <div class="col-md-4">
-                <h3 class="footer-logo">AR <span>EVENTS</span></h3>
-                <p>
-                    Our team excels in all types of events and ensures the highest standards with dedication and expertise.
-                </p>
+                <div class="contact-box">📞 +91 9381257976</div>
             </div>
-
-            <!-- Useful Links -->
             <div class="col-md-4">
-                <h5>Useful Links</h5>
-                <ul class="footer-links">
-                    <li>Home</li>
-                    <li>About Us</li>
-                    <li>Gallery</li>
-                    <li>Contact Us</li>
-                </ul>
+                <div class="contact-box">✉️ arevents@gmail.com</div>
             </div>
-
-            <!-- Services -->
             <div class="col-md-4">
-                <h5>Services</h5>
-                <ul class="footer-links">
-                    <li>Wedding & Receptions</li>
-                    <li>Corporate Events</li>
-                    <li>Birthday Parties</li>
-                    <li>Entertainment</li>
-                    <li>Special Events</li>
-                </ul>
+                <div class="contact-box">
+                    📍 Hyderabad, Telangana
+                </div>
             </div>
-
         </div>
 
-        <hr>
-
-        <!-- Contact Cards -->
-       <div class="row text-center contact-cards">
-
-    <div class="col-md-4">
-        <div class="contact-box">
-            <div class="icon">📞</div>
-            <p>+91 9381257976</p>
-        </div>
     </div>
-
-    <div class="col-md-4">
-        <div class="contact-box">
-            <div class="icon">✉️</div>
-            <p>arevents@gmail.com</p>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="contact-box">
-            <div class="icon">📍</div>
-            <p>
-                SY.NO.41, 42, 34 & 33/B, Karmanghat Rd,  
-                Hyderabad, Telangana 500079
-            </p>
-        </div>
-    </div>
-</div>
-
 </footer>
-
-
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
