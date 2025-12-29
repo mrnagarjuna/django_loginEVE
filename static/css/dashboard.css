@@ -14,7 +14,7 @@ body {
 .hero-section {
     height: 100vh;
     width: 100%;
-    background-image: url("../images/regi.jpg");
+    background-image: url("../images/part.jpg");
     background-size: cover;            /* Make background fully cover */
     background-position: center;
     background-repeat: no-repeat;
@@ -135,28 +135,43 @@ body {
     }
 }
 
-/* ================= SERVICES SECTION ================= */
+/* ================= SERVICES ================= */
+
 .services-section {
-    padding: 80px 0;
+    padding: 60px 0;
     background: #f8f9fa;
 }
 
 .service-card {
-    background: #ffffff;
-    border-radius: 14px;
+    background: #fff;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
-    margin-bottom: 30px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
 }
 
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.25);
+}
+
+/* IMAGE FIX — THIS IS THE KEY 🔥 */
 .service-card img {
     width: 100%;
-    height: 170px;                 /* SMALL IMAGE */
-    object-fit: cover;
+    height: 200px;        /* SAME HEIGHT */
+    object-fit: cover;   /* CROPS VERTICAL IMAGE */
+    object-position: center;
 }
 
+/* CONTENT */
 .service-content {
-    padding: 16px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .service-content h5 {
@@ -167,25 +182,103 @@ body {
 .service-content p {
     font-size: 14px;
     color: #555;
+    flex-grow: 1;
 }
 
-/* ================= RESPONSIVE ================= */
-@media (max-width: 992px) {
-    .navbar-nav {
-        gap: 20px;
-    }
+.service-content .btn {
+    align-self: flex-start;
+    border-radius: 6px;
 }
 
-@media (max-width: 768px) {
-    .hero-card {
-        padding: 35px;
-    }
+/* ================= OUR WORK ================= */
+.our-work-section {
+    padding: 60px 0;
+    background: #fff;
+}
 
-    .service-card img {
-        height: 140px;
-    }
+.our-work-section h2 {
+    font-weight: 700;
+}
 
-    .scroll-text span {
-        font-size: 26px;
-    }
+.gallery-img {
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.gallery-img img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.gallery-img img:hover {
+    transform: scale(1.08);
+}
+
+/* ================= FOOTER ================= */
+.footer-section {
+    background: #f4fbff;
+    padding: 60px 0;
+    color: #333;
+}
+
+.footer-logo {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.footer-logo span {
+    color: #f4a300;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.footer-links li:hover {
+    color: #f4a300;
+}
+
+/* ================= CONTACT BOX STYLE ================= */
+
+.contact-cards {
+    margin-top: 50px;
+}
+
+/* Pink Contact Box */
+.contact-box {
+    background: #fde9ef;              /* LIGHT PINK */
+    padding: 35px 25px;
+    border-radius: 14px;
+    height: 100%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.contact-box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 35px rgba(0,0,0,0.2);
+}
+
+/* Icon styling */
+.contact-box .icon {
+    font-size: 28px;
+    color: #c49b0f;                  /* GOLD ICON */
+    margin-bottom: 12px;
+}
+
+/* Text */
+.contact-box p {
+    margin: 0;
+    font-size: 15px;
+    color: #333;
+    line-height: 1.6;
 }

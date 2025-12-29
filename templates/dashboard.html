@@ -64,9 +64,9 @@
         <div class="row">
 
             <!-- Wedding -->
-            <div class="col-md-4">
+            <div class="col-md-4 mb-4">
                 <div class="service-card">
-                    <img src="{% static 'images/wd.jpg' %}" alt="Wedding">
+                    <img src="{% static 'images/wd.jpg' %}">
                     <div class="service-content">
                         <h5>Wedding</h5>
                         <p>Weddings are special events that mark a new beginning.</p>
@@ -76,9 +76,9 @@
             </div>
 
             <!-- Corporate -->
-            <div class="col-md-4">
+            <div class="col-md-4 mb-4">
                 <div class="service-card">
-                    <img src="{% static 'images/cor.jpg' %}" alt="Corporate">
+                    <img src="{% static 'images/cor.jpg' %}">
                     <div class="service-content">
                         <h5>Corporate Events</h5>
                         <p>Corporate events help networking and growth.</p>
@@ -86,68 +86,196 @@
                     </div>
                 </div>
             </div>
-   <!-- Birthday -->
-            <div class="col-md-4">
+
+            <!-- Birthday -->
+            <div class="col-md-4 mb-4">
                 <div class="service-card">
-                    <img src="{% static 'images/bir.jpg' %}" alt="Birthday">
+                    <img src="{% static 'images/bir.jpg' %}">
                     <div class="service-content">
                         <h5>Birthday Parties</h5>
                         <p>A birthday party is a joyful celebration.</p>
                         <a href="#" class="btn btn-warning btn-sm">Know More</a>
                     </div>
                 </div>
-
             </div>
-               <div class="col-md-4">
+
+            <!-- Entertainment -->
+            <div class="col-md-4 mb-4">
                 <div class="service-card">
-                    <img src="{% static 'images/cele.jpg' %}" alt="Entertainment">
+                    <img src="{% static 'images/cele.jpg' %}">
                     <div class="service-content">
                         <h5>Entertainment</h5>
-                        <p>Corporate events help networking and growth.</p>
+                        <p>Fun-filled entertainment for all events.</p>
                         <a href="#" class="btn btn-warning btn-sm">Know More</a>
                     </div>
                 </div>
             </div>
 
-               <div class="col-md-4">
+            <!-- Receptions -->
+            <div class="col-md-4 mb-4">
                 <div class="service-card">
-                    <img src="{% static 'images/rec.jpg' %}" alt="Receptions">
+                    <img src="{% static 'images/rec.jpg' %}">
                     <div class="service-content">
                         <h5>Receptions</h5>
-                        <p>Corporate events help networking and growth.</p>
+                        <p>Make your reception memorable.</p>
                         <a href="#" class="btn btn-warning btn-sm">Know More</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Birthday -->
-            <div class="col-md-4">
+             <!-- Receptions -->
+            <div class="col-md-4 mb-4">
                 <div class="service-card">
-                    <img src="{% static 'images/hal.jpg' %}" alt="Haldi & Mehindi">
+                    <img src="{% static 'images/rec.jpg' %}">
+                    <div class="service-content">
+                        <h5>Games</h5>
+                        <p>Make your reception memorable.</p>
+                        <a href="#" class="btn btn-warning btn-sm">Know More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Haldi -->
+            <div class="col-md-4 mb-4">
+                <div class="service-card">
+                    <img src="{% static 'images/hal.jpg' %}">
                     <div class="service-content">
                         <h5>Haldi & Mehindi</h5>
-                        <p>A birthday party is a joyful celebration.</p>
+                        <p>Traditional celebrations with elegance.</p>
                         <a href="#" class="btn btn-warning btn-sm">Know More</a>
                     </div>
                 </div>
-                
             </div>
-             
-            <div class="col-md-4">
+
+            <!-- Photography -->
+            <div class="col-md-4 mb-4">
                 <div class="service-card">
-                    <img src="{% static 'images/cons.jpg' %}" alt="Concerts">
+                    <img src="{% static 'images/pho.jpg' %}">
                     <div class="service-content">
-                        <h5>Muscical Concerts</h5>
-                        <p>A birthday party is a joyful celebration.</p>
+                        <h5>Photography & Videography</h5>
+                        <p>We capture your special moments professionally.</p>
                         <a href="#" class="btn btn-warning btn-sm">Know More</a>
                     </div>
                 </div>
             </div>
-            
+
+            <!-- Concerts -->
+            <div class="col-md-4 mb-4">
+                <div class="service-card">
+                    <img src="{% static 'images/cons.jpg' %}">
+                    <div class="service-content">
+                        <h5>Musical Concerts</h5>
+                        <p>Live music and unforgettable vibes.</p>
+                        <a href="#" class="btn btn-warning btn-sm">Know More</a>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
 </section>
+
+    <!-- ================= OUR WORK SECTION ================= -->
+    <section class="our-work-section">
+        <div class="container">
+            <div class="row text-center mb-4">
+                <div class="col-md-4">
+                    <h2>1500+</h2>
+                    <p>Featured Events</p>
+                </div>
+                <div class="col-md-4">
+                    <h2>1200+</h2>
+                    <p>Happy Customers</p>
+                </div>
+                <div class="col-md-4">
+                    <h2>6+</h2>
+                    <p>Years of Experience</p>
+                </div>
+            </div>
+
+            <h2 class="text-center mb-4">Our Work</h2>
+
+            <div class="row gallery">
+                {% for i in "12345678" %}
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="gallery-img">
+                        <img src="{% static 'images/img1' %}{{ forloop.counter }}.jpg" alt="Work">
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+<!-- ================= FOOTER ================= -->
+<footer class="footer-section">
+    <div class="container">
+        <div class="row">
+
+            <!-- Logo + About -->
+            <div class="col-md-4">
+                <h3 class="footer-logo">AR <span>EVENTS</span></h3>
+                <p>
+                    Our team excels in all types of events and ensures the highest standards with dedication and expertise.
+                </p>
+            </div>
+
+            <!-- Useful Links -->
+            <div class="col-md-4">
+                <h5>Useful Links</h5>
+                <ul class="footer-links">
+                    <li>Home</li>
+                    <li>About Us</li>
+                    <li>Gallery</li>
+                    <li>Contact Us</li>
+                </ul>
+            </div>
+
+            <!-- Services -->
+            <div class="col-md-4">
+                <h5>Services</h5>
+                <ul class="footer-links">
+                    <li>Wedding & Receptions</li>
+                    <li>Corporate Events</li>
+                    <li>Birthday Parties</li>
+                    <li>Entertainment</li>
+                    <li>Special Events</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <!-- Contact Cards -->
+       <div class="row text-center contact-cards">
+
+    <div class="col-md-4">
+        <div class="contact-box">
+            <div class="icon">📞</div>
+            <p>+91 9381257976</p>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="contact-box">
+            <div class="icon">✉️</div>
+            <p>arevents@gmail.com</p>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="contact-box">
+            <div class="icon">📍</div>
+            <p>
+                SY.NO.41, 42, 34 & 33/B, Karmanghat Rd,  
+                Hyderabad, Telangana 500079
+            </p>
+        </div>
+    </div>
+</div>
+
+</footer>
+
 
 
 <!-- Bootstrap JS -->
