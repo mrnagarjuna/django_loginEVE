@@ -42,3 +42,7 @@ def dashboard(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+    
+def booking(request):
+    return render(request, 'layouts/booking.html')
+
