@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        SSH_CREDENTIAL = 'ec2-ssh-key'        // Your Jenkins SSH key credential
-        SERVER_IP = '13.232.69.21'           // EC2 IP
-        APP_PATH = '/home/ubuntu/django_loginEVE'  // Path on EC2
+        SSH_CREDENTIAL = 'ec2-ssh-key'       // Your Jenkins SSH credential ID
+        SERVER_IP = '13.232.69.21'           // Your EC2 IP
+        APP_PATH = '/home/ubuntu/django_loginEVE'  // Path to Django project on EC2
         IMAGE_NAME = 'django_loginEVE_app'
         CONTAINER_NAME = 'django_loginEVE_container'
     }
@@ -16,8 +16,6 @@ pipeline {
                     sh """
                     ssh -o StrictHostKeyChecking=no ubuntu@${SERVER_IP} << EOF
                         cd ${APP_PATH}
-
-                        # Pull latest code
                         git pull origin main
 
                         # Remove old container if exists
