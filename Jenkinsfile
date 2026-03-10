@@ -2,30 +2,43 @@ pipeline {
     agent any
 
     environment {
-        SSH_CREDENTIAL = 'ec2-ssh-key'       // Your Jenkins SSH credential ID
-        SERVER_IP = '13.232.69.21'           // Your EC2 IP
-        APP_PATH = '/home/ubuntu/django_loginEVE'  // Path to Django project on EC2
-        IMAGE_NAME = 'django_loginEVE_app'
-        CONTAINER_NAME = 'django_loginEVE_container'
+        SSH_CREDENTIAL = 'ec2-ssh-key'        // Your SSH key credential ID
+        SERVER_IP     = '13.232.69.21'        // EC2 IP
+        APP_PATH      = '/home/ubuntu/django_loginEVE'
+        IMAGE_NAME    = 'django_logineve_app'
+        CONTAINER_NAME = 'django_logineve_container'
+        GITHUB_TOKEN  = credentials('github-token')   // Use the PAT securely
     }
 
     stages {
-        stage('Deploy Docker on EC2') {
+
+        stage('Deploy to EC2') {
             steps {
+                echo "Deploying Django app to EC2 with Docker..."
                 sshagent([SSH_CREDENTIAL]) {
                     sh """
                     ssh -o StrictHostKeyChecking=no ubuntu@${SERVER_IP} << EOF
+                        mkdir -p ${APP_PATH}
                         cd ${APP_PATH}
-                        git pull origin main
 
-                        # Remove old container if exists
+                        # Pull latest code from GitHub using token
+                        if [ -d ".git" ]; then
+                            git reset --hard
+                            git pull https://$GITHUB_TOKEN@github.com/mrnagarjuna/django_loginEVE.git main
+                        else
+                            git clone https://$GITHUB_TOKEN@github.com/mrnagarjuna/django_loginEVE.git ${APP_PATH}
+                        fi
+
+                        # Remove old container
                         docker rm -f ${CONTAINER_NAME} || true
 
                         # Build Docker image
                         docker build -t ${IMAGE_NAME} .
 
-                        # Run container in detached mode
+                        # Run Docker container
                         docker run -d --name ${CONTAINER_NAME} -p 8000:8000 ${IMAGE_NAME}
+
+                        docker ps
                     EOF
                     """
                 }
@@ -35,10 +48,10 @@ pipeline {
 
     post {
         success {
-            echo "Docker container deployed successfully on EC2! 🚀"
+            echo "✅ Deployment successful! Visit http://${SERVER_IP}:8000"
         }
         failure {
-            echo "Deployment failed. Check Jenkins console logs."
+            echo "❌ Deployment failed. Check Jenkins logs."
         }
     }
 }
