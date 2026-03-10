@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        SSH_CREDENTIAL = 'ec2-ssh-key'        // Jenkins SSH key credential
-        SERVER_IP = '13.232.69.21'           // Your EC2 IP
+        SSH_CREDENTIAL = 'ec2-ssh-key'        // Your Jenkins SSH key credential
+        SERVER_IP = '13.232.69.21'           // EC2 IP
         APP_PATH = '/home/ubuntu/django_loginEVE'  // Path on EC2
         IMAGE_NAME = 'django_loginEVE_app'
         CONTAINER_NAME = 'django_loginEVE_container'
@@ -15,7 +15,6 @@ pipeline {
                 sshagent([SSH_CREDENTIAL]) {
                     sh """
                     ssh -o StrictHostKeyChecking=no ubuntu@${SERVER_IP} << EOF
-                        # Go to project folder
                         cd ${APP_PATH}
 
                         # Pull latest code
@@ -24,7 +23,7 @@ pipeline {
                         # Remove old container if exists
                         docker rm -f ${CONTAINER_NAME} || true
 
-                        # Build new Docker image
+                        # Build Docker image
                         docker build -t ${IMAGE_NAME} .
 
                         # Run container in detached mode
