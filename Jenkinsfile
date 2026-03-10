@@ -2,35 +2,29 @@ pipeline {
     agent any
 
     environment {
-        SSH_CREDENTIAL = 'ec2-ssh-key'        // Jenkins SSH credential ID
-        SERVER_IP = '13.232.69.21'           // EC2 IP
-        APP_PATH = '/home/ubuntu/django_loginEVE'  // Path to project on server
-        IMAGE_NAME = 'django_loginEVE_app'        // Docker image name
-        CONTAINER_NAME = 'django_loginEVE_container' // Container name
+        SSH_CREDENTIAL = 'ec2-ssh-key'        // Jenkins SSH key credential
+        SERVER_IP = '13.232.69.21'           // Your EC2 IP
+        APP_PATH = '/home/ubuntu/django_loginEVE'  // Path on EC2
+        IMAGE_NAME = 'django_loginEVE_app'
+        CONTAINER_NAME = 'django_loginEVE_container'
     }
 
     stages {
-
-        stage('Clone Repository') {
-            steps {
-                git branch: 'main', url: 'https://github.com/mrnagarjuna/django_loginEVE.git'
-            }
-        }
-
-        stage('Deploy via Docker') {
+        stage('Deploy via Docker on EC2') {
             steps {
                 sshagent([SSH_CREDENTIAL]) {
                     sh """
                     ssh -o StrictHostKeyChecking=no ubuntu@${SERVER_IP} << EOF
+                        # Navigate to your app folder
                         cd ${APP_PATH}
 
-                        # Pull latest code
+                        # Pull latest code from GitHub
                         git pull origin main
 
-                        # Remove existing container if running
+                        # Remove old container if exists
                         docker rm -f ${CONTAINER_NAME} || true
 
-                        # Build new Docker image
+                        # Build Docker image
                         docker build -t ${IMAGE_NAME} .
 
                         # Run container in detached mode
@@ -44,7 +38,7 @@ pipeline {
 
     post {
         success {
-            echo "Docker deployment completed successfully! 🚀"
+            echo "Docker container deployed successfully on EC2! 🚀"
         }
         failure {
             echo "Deployment failed. Check Jenkins console logs."
