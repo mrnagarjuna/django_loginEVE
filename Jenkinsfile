@@ -10,21 +10,21 @@ pipeline {
     }
 
     stages {
-        stage('Deploy via Docker on EC2') {
+        stage('Deploy Docker on EC2') {
             steps {
                 sshagent([SSH_CREDENTIAL]) {
                     sh """
                     ssh -o StrictHostKeyChecking=no ubuntu@${SERVER_IP} << EOF
-                        # Navigate to your app folder
+                        # Go to project folder
                         cd ${APP_PATH}
 
-                        # Pull latest code from GitHub
+                        # Pull latest code
                         git pull origin main
 
                         # Remove old container if exists
                         docker rm -f ${CONTAINER_NAME} || true
 
-                        # Build Docker image
+                        # Build new Docker image
                         docker build -t ${IMAGE_NAME} .
 
                         # Run container in detached mode
