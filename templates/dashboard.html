@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -50,7 +50,7 @@
         <div class="hero-card">
             <h2>✨ Celebrate Every Moment With Us ✨</h2>
             <p>Hello, <strong>{{ request.user.username }}</strong> 👋</p>
- <a href="{% url 'booking' %}" class="btn btn-success mt-3">
+ <a href="{% url 'register' %}" class="btn btn-success">
     🎉 Book an Event
 </a>
 

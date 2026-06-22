@@ -1,87 +1,292 @@
-/* ==========================
-   Full Page Background
-========================== */
-body {
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+/* Reset */
+*{
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body{
+
     min-height: 100vh;
-    background-image: url("../images/event-bg.jpg"); /* Update path */
+
+    font-family: 'Poppins', sans-serif;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,0.30),
+            rgba(0,0,0,0.30)
+        ),
+        url('../images/login-bg.jpg');
+
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
+
+    overflow-x: hidden;
 }
 
-/* ==========================
-   Center Content Vertically
-========================== */
-.row.justify-content-center {
+/* Main Container */
+.main-container{
+
     min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
     align-items: center;
 }
 
-/* ==========================
-   Glass Transparent Card
-========================== */
-.register-box {
-    background: rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.35);
+/* Register Box */
+.register-box{
+
+    width: 100%;
+
+    max-width: 720px;
+
+    padding: 55px;
+
+    border-radius: 28px;
+
+    background: rgba(33, 55, 120, 0.35);
+
+    backdrop-filter: blur(16px);
+
+    -webkit-backdrop-filter: blur(16px);
+
+    border: 1px solid rgba(255,255,255,0.12);
+
+    box-shadow:
+        0 8px 32px rgba(0,0,0,0.35),
+        0 0 18px rgba(0,123,255,0.25);
 }
 
-/* ==========================
-   Labels
-========================== */
-.form-group label {
+/* Heading */
+.register-box h2{
+
+    text-align: center;
+
+    color: #ffffff;
+
+    font-size: 64px;
+
     font-weight: 600;
-    color: #000;
+
+    margin-bottom: 40px;
 }
 
-/* ==========================
-   Inputs (Username, Password, Confirm Password)
-========================== */
-.form-control {
-    background-color: #ffffff !important;
-    color: #000000 !important;
-    border-radius: 8px;
+/* Labels */
+label{
+
+    color: #ffffff;
+
+    font-size: 28px;
+
+    font-weight: 500;
+
+    margin-bottom: 12px;
+}
+
+/* Input Wrapper */
+.input-box{
+
+    position: relative;
+
+    margin-bottom: 15px;
+}
+
+/* Icons */
+.input-box i{
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 22px;
+
+    transform: translateY(-50%);
+
+    color: #777777;
+
+    font-size: 24px;
+
+    z-index: 10;
+}
+
+/* Inputs */
+.form-control{
+
+    height: 86px;
+
+    border-radius: 14px;
+
     border: none;
-    padding: 10px;
+
+    background: rgba(255,255,255,0.92);
+
+    padding-left: 70px;
+
+    font-size: 28px;
+
+    color: #333333;
 }
 
-.form-control::placeholder {
-    color: #666;
+/* Placeholder */
+.form-control::placeholder{
+
+    color: #777777;
 }
 
-.form-control:focus {
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+/* Focus */
+.form-control:focus{
+
+    border: none;
+
+    box-shadow: 0 0 0 5px rgba(0,123,255,0.18);
 }
 
-/* ==========================
-   Buttons
-========================== */
-.btn-primary,
-.btn-secondary {
-    margin-top: 10px;
-    border-radius: 8px;
-    padding: 10px 15px;
-    font-weight: 600;
+/* Buttons */
+.btn{
+
+    height: 80px;
+
+    border-radius: 14px;
+
+    font-size: 32px;
+
+    font-weight: 500;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 12px;
+
+    border: none;
+
+    transition: 0.3s ease;
 }
 
-/* ==========================
-   Error Text
-========================== */
-.text-danger {
-    font-size: 13px;
+/* Register Button */
+.register-btn{
+
+    background: #007bff;
+
+    margin-top: 20px;
 }
 
-/* ==========================
-   Mobile Responsive
-========================== */
-@media (max-width: 576px) {
-    .register-box {
-        padding: 20px;
+/* Hover */
+.register-btn:hover{
+
+    background: #0062cc;
+
+    transform: scale(1.01);
+}
+
+/* Login Button */
+.login-btn{
+
+    background: rgba(255,255,255,0.35);
+
+    color: #ffffff;
+}
+
+/* Login Hover */
+.login-btn:hover{
+
+    background: rgba(255,255,255,0.45);
+
+    color: #ffffff;
+
+    transform: scale(1.01);
+}
+
+/* Errors */
+.text-danger{
+
+    font-size: 14px;
+
+    color: #ffb3b3 !important;
+}
+
+/* Tablet */
+@media(max-width: 992px){
+
+    .register-box{
+
+        max-width: 90%;
+
+        padding: 40px;
+    }
+
+    .register-box h2{
+
+        font-size: 48px;
+    }
+
+    label{
+
+        font-size: 22px;
+    }
+
+    .form-control{
+
+        height: 70px;
+
+        font-size: 22px;
+    }
+
+    .btn{
+
+        height: 65px;
+
+        font-size: 24px;
+    }
+}
+
+/* Mobile */
+@media(max-width: 576px){
+
+    .register-box{
+
+        padding: 25px;
+    }
+
+    .register-box h2{
+
+        font-size: 32px;
+    }
+
+    label{
+
+        font-size: 18px;
+    }
+
+    .form-control{
+
+        height: 55px;
+
+        font-size: 16px;
+
+        padding-left: 50px;
+    }
+
+    .btn{
+
+        height: 52px;
+
+        font-size: 18px;
+    }
+
+    .input-box i{
+
+        font-size: 18px;
+
+        left: 16px;
     }
 }

@@ -16,9 +16,29 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from authentication import views
+
+# urlpatterns = [
+
+#     path('admin/', admin.site.urls),
+
+#     # Default URL
+#     path('', views.login_view, name='login'),
+
+#     path('login/', views.login_view, name='login'),
+
+#     path('register/', views.register_view, name='register'),
+
+# ]
+from django.contrib import admin
+from django.urls import path
+from core import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-     path('', include('app1.urls')),
+    path('', views.dashboard, name='dashboard'),
+    path('register/', views.register_view, name='register'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('booking/', views.booking, name='booking'),
 ]
 

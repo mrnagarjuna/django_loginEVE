@@ -124,3 +124,17 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+body{
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: #f5f5f5;
+}
+
+.auth-card{
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
