@@ -20,6 +20,33 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
+            # Update packages
+            sudo apt update
+
+            # Install Git
+            sudo apt install -y git
+
+            # Install Docker if not installed
+            if ! command -v docker >/dev/null 2>&1; then
+              sudo apt install -y docker.io
+              sudo systemctl enable docker
+              sudo systemctl start docker
+            fi
+
+            # Clone repository if it doesn't exist
+            if [ ! -d "/home/ubuntu/django_loginEVE" ]; then
+              cd /home/ubuntu
+              git clone https://github.com/mrnagarjuna/django_loginEVE.git
+            fi
+
+            # Go to project
             cd /home/ubuntu/django_loginEVE
+
+            # Pull latest code
+            git pull origin main
+
+            # Make deploy script executable
             chmod +x deploy.sh
+
+            # Run deployment
             ./deploy.sh
