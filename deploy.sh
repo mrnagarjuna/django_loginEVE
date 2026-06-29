@@ -1,25 +1,27 @@
-name: Deploy Django Docker App
+#!/bin/bash
+set -e
 
-on:
-  push:
-    branches:
-      - main
+cd /home/ubuntu/django_loginEVE
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+echo "Pulling latest code..."
+git pull origin main
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+echo "Stopping old container..."
+sudo docker stop myc1 || true
 
-      - name: Deploy to EC2
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_KEY }}
-          script: |
-            cd /home/ubuntu/django_loginEVE
-            chmod +x deploy.sh
-            ./deploy.sh
+echo "Removing old container..."
+sudo docker rm myc1 || true
+
+echo "Building image..."
+sudo docker build -t djangoapp .
+
+echo "Starting container..."
+sudo docker run -d \
+  --name myc1 \
+  --restart always \
+  -p 8000:8000 \
+  djangoapp
+
+echo "Deployment completed"
+
+sudo docker ps
