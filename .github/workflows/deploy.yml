@@ -27,7 +27,7 @@ jobs:
 
             git pull origin main
 
-            sudo docker build -t djangoapp .
+            sudo docker build -t eventapp .
 
             sudo docker run -d \
               --name myc1 \
