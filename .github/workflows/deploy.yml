@@ -27,11 +27,6 @@ jobs:
 
             git pull origin main
 
-            sudo docker stop myc1 || true
-            sudo docker rm myc1 || true
-
-            sudo docker rmi djangoapp:latest || true
-
             sudo docker build -t djangoapp .
 
             sudo docker run -d \
