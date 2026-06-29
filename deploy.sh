@@ -7,10 +7,6 @@ cd /home/ubuntu/django_loginEVE
 echo "Pulling latest code..."
 git pull origin main
 
-echo "Stopping old container..."
-sudo docker stop myc1 || true
-sudo docker rm myc1 || true
-
 echo "Removing old image..."
 sudo docker rmi djangoapp:latest || true
 
