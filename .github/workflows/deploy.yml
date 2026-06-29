@@ -22,6 +22,8 @@ jobs:
 
           script: |
             cd /home/ubuntu/django_loginEVE
+            chmod+x deploy.sh
+            ./deploy.sh
 
             git pull origin main
 
