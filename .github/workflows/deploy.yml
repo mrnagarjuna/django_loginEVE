@@ -19,20 +19,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
-
           script: |
             cd /home/ubuntu/django_loginEVE
-            chmod+x deploy.sh
+            chmod +x deploy.sh
             ./deploy.sh
-
-            git pull origin main
-
-            sudo docker build -t eventapp .
-
-            sudo docker run -d \
-              --name myc1 \
-              -p 8000:8000 \
-              --restart always \
-              djangoapp
-
-            sudo docker ps
