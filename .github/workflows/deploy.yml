@@ -1,52 +1,105 @@
-name: Deploy Django Docker App
+name: Deploy Django App
 
 on:
+
   push:
+
     branches:
+
       - main
 
 jobs:
+
   deploy:
+
     runs-on: ubuntu-latest
 
+    defaults:
+
+      run:
+
+        working-directory: terraform
+
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
 
-      - name: Deploy to EC2
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_KEY }}
-          script: |
-            # Update packages
-            sudo apt update
+    - uses: actions/checkout@v4
 
-            # Install Git
-            sudo apt install -y git
+    - uses: hashicorp/setup-terraform@v3
 
-            # Install Docker if not installed
-            if ! command -v docker >/dev/null 2>&1; then
-              sudo apt install -y docker.io
-              sudo systemctl enable docker
-              sudo systemctl start docker
-            fi
+    - name: Configure AWS
 
-            # Clone repository if it doesn't exist
-            if [ ! -d "/home/ubuntu/django_loginEVE" ]; then
-              cd /home/ubuntu
+      uses: aws-actions/configure-aws-credentials@v4
+
+      with:
+
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+        aws-region: ap-south-1
+
+    - name: Terraform Init
+
+      run: terraform init
+
+    - name: Terraform Apply
+
+      run: terraform apply -auto-approve
+
+    - name: Get Public IP
+
+      id: terraform
+
+      run: |
+
+        echo "public_ip=$(terraform output -raw public_ip)" >> $GITHUB_OUTPUT
+
+    - name: Wait
+
+      run: sleep 60
+
+    - name: Deploy Django
+
+      uses: appleboy/ssh-action@v1.0.3
+
+      with:
+
+        host: ${{ steps.terraform.outputs.public_ip }}
+
+        username: ubuntu
+
+        key: ${{ secrets.EC2_KEY }}
+
+        script: |
+
+          sudo apt update
+
+          sudo apt install docker.io git -y
+
+          sudo systemctl enable docker
+
+          sudo systemctl start docker
+
+          if [ ! -d "/home/ubuntu/django_loginEVE" ]; then
+
               git clone https://github.com/mrnagarjuna/django_loginEVE.git
-            fi
 
-            # Go to project
-            cd /home/ubuntu/django_loginEVE
+          fi
 
-            # Pull latest code
-            git pull origin main
+          cd django_loginEVE
 
-            # Make deploy script executable
-            chmod +x deploy.sh
+          git pull origin main
 
-            # Run deployment
-            ./deploy.sh
+          sudo docker build -t djangoapp .
+
+          sudo docker stop myc1 || true
+
+          sudo docker rm myc1 || true
+
+          sudo docker run -d \
+            --name myc1 \
+            --restart always \
+            -p 8000:8000 \
+            djangoapp
+
+          sudo docker ps
