@@ -1,105 +1,79 @@
 name: Deploy Django App
 
 on:
-
   push:
-
     branches:
-
       - main
 
 jobs:
-
   deploy:
-
     runs-on: ubuntu-latest
 
     defaults:
-
       run:
-
         working-directory: terraform
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-    - uses: actions/checkout@v4
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
 
-    - uses: hashicorp/setup-terraform@v3
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
 
-    - name: Configure AWS
+      - name: Terraform Init
+        run: terraform init
 
-      uses: aws-actions/configure-aws-credentials@v4
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
 
-      with:
+      - name: Get Public IP
+        id: terraform
+        run: |
+          echo "public_ip=$(terraform output -raw public_ip)" >> $GITHUB_OUTPUT
 
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      - name: Wait for EC2
+        run: sleep 60
 
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Deploy Django Application
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ steps.terraform.outputs.public_ip }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            sudo apt update
+            sudo apt install -y docker.io git
 
-        aws-region: ap-south-1
+            sudo systemctl enable docker
+            sudo systemctl start docker
 
-    - name: Terraform Init
+            sudo usermod -aG docker ubuntu
 
-      run: terraform init
-
-    - name: Terraform Apply
-
-      run: terraform apply -auto-approve
-
-    - name: Get Public IP
-
-      id: terraform
-
-      run: |
-
-        echo "public_ip=$(terraform output -raw public_ip)" >> $GITHUB_OUTPUT
-
-    - name: Wait
-
-      run: sleep 60
-
-    - name: Deploy Django
-
-      uses: appleboy/ssh-action@v1.0.3
-
-      with:
-
-        host: ${{ steps.terraform.outputs.public_ip }}
-
-        username: ubuntu
-
-        key: ${{ secrets.EC2_KEY }}
-
-        script: |
-
-          sudo apt update
-
-          sudo apt install docker.io git -y
-
-          sudo systemctl enable docker
-
-          sudo systemctl start docker
-
-          if [ ! -d "/home/ubuntu/django_loginEVE" ]; then
-
+            if [ ! -d "/home/ubuntu/django_loginEVE" ]; then
+              cd /home/ubuntu
               git clone https://github.com/mrnagarjuna/django_loginEVE.git
+            fi
 
-          fi
+            cd /home/ubuntu/django_loginEVE
 
-          cd django_loginEVE
+            git pull origin main
 
-          git pull origin main
+            sudo docker build -t djangoapp .
 
-          sudo docker build -t djangoapp .
+            sudo docker stop myc1 || true
+            sudo docker rm myc1 || true
 
-          sudo docker stop myc1 || true
+            sudo docker run -d \
+              --name myc1 \
+              --restart always \
+              -p 8000:8000 \
+              djangoapp
 
-          sudo docker rm myc1 || true
-
-          sudo docker run -d \
-            --name myc1 \
-            --restart always \
-            -p 8000:8000 \
-            djangoapp
-
-          sudo docker ps
+            sudo docker ps
